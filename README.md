@@ -14,6 +14,7 @@ Make sure all packages from requirements.txt are available in your environment. 
 ```bash
 python3 -m venv impfenv
 source impfenv/bin/activate
+pip install -r requirements.txt 
 ```
 
 ## Usage

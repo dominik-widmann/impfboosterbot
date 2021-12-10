@@ -18,7 +18,7 @@ if __name__ == '__main__':
     logging.root.setLevel(logging.INFO)
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger('Impfterminbucher')
-    browser = webdriver.Safari()
+    browser = webdriver.Firefox()
     url = 'https://ciam.impfzentren.bayern/auth/realms/C19V-Citizen/protocol/openid-connect/auth?client_id=c19v-frontend&redirect_uri=https%3A%2F%2Fimpfzentren.bayern%2Fcitizen%2F&state=c5c6e344-a034-4bfc-8a16-82d223932875&response_mode=fragment&response_type=code&scope=openid&nonce=15b8b742-4fd4-487b-a5de-759ffdb44008&ui_locales=de'
 
     # open the website

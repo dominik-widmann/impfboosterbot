@@ -6,7 +6,7 @@ Please use with care and at your own risk!
 ## Requirements
 * A user account at https://impfzentren.bayern/ 
 * Firefox installed
-* geckodriver installed: install the firefox selenium driver and make sure it is on your path (e.g. by installing it to /usr/local/bin/). https://github.com/mozilla/geckodriver/releases
+* Geckodriver installed: install the firefox selenium driver and make sure it is on your path (e.g. by installing it to /usr/local/bin/). https://github.com/mozilla/geckodriver/releases
 
 ## Installation
 Make sure all packages from requirements.txt are available in your environment. You can use venv for that like so:

@@ -5,9 +5,16 @@ Bot that books booster vaccines at the Bayerische Impfzentrum
 
 1) Make sure the firefox browser is installed 
 2) Install the firefox selenium driver and make sure it is on your path (e.g. by installing it to /usr/local/bin/). https://github.com/mozilla/geckodriver/releases
-3) Make sure all packages from requirements.txt are available in your environment
+3) Make sure all packages from requirements.txt are available in your environment. You can use venv for that like so:
+
+```bash
+python3 -m venv impfenv
+source impfenv/bin/activate
+```
 
 ## Usage
+Make sure you followed all installation steps and activated your venv. Then from within your venv run main.py. The usage is as follows:
+
 ```bash
 python main.py -h
 usage: main.py [-h] username password person_number

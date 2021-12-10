@@ -1,4 +1,4 @@
-# impfboosterbot
+# Impfboosterbot
 Bot that books booster vaccines at the Bayerische Impfzentrum.
 
 Please use with care and at your own risk!

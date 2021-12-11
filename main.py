@@ -7,9 +7,9 @@ import logging
 logging.basicConfig(format='%(asctime)s %(message)s')
 from selenium.webdriver.common.by import By
 
-
 if __name__ == '__main__':
     import argparse
+
     parser = argparse.ArgumentParser()
     parser.add_argument('username')
     parser.add_argument('password')
@@ -65,10 +65,26 @@ if __name__ == '__main__':
             temrin_anzeigen_button = browser.find_element('xpath', naechster_termin_anzeigen_xpath)
             browser.execute_script("arguments[0].click();", temrin_anzeigen_button)
             time.sleep(1)
-            # if there is a termin, click on Termin buchen
-            termin_buchen_xpath = '//*[@id="main"]/div/div/form/nav/button[2]'
-            termin_buchen_button = browser.find_element('xpath', termin_buchen_xpath)
-            result = browser.execute_script("arguments[0].click();", termin_buchen_button)
+
+            try:
+                impftermin_moeglich_xpath = '//*[@id="main"]/div/div/form/div/div[3]/div/div[2]/dd[1]'
+                termin_text = browser.find_element(By.XPATH, impftermin_moeglich_xpath).text
+                logger.warning("Found Termin: " + termin_text)
+
+                # if there is a Termin, click on Termin buchen
+                termin_buchen_xpath = '//*[@id="main"]/div/div/form/nav/button[2]'
+                termin_buchen_button = browser.find_element('xpath', termin_buchen_xpath)
+                browser.execute_script("arguments[0].click();", termin_buchen_button)
+
+                # If we got until here, assume we were successful
+                logging.warning("Booked.")
+                termin_verfuegbar = True
+                break
+
+            except:
+                # no Termin found
+                pass
+
 
         except Exception as e:
             logger.warning(str(e))
@@ -76,4 +92,4 @@ if __name__ == '__main__':
         # refresh page and try again
         browser.refresh()
         random_wait = random()
-        time.sleep(1+random_wait)
+        time.sleep(1 + random_wait)

@@ -90,7 +90,7 @@ if __name__ == '__main__':
                     # book
                     termin_buchen_xpath = '//*[@id="main"]/div/div/form/nav/button[2]'
                     termin_buchen_button = browser.find_element('xpath', termin_buchen_xpath)
-                    #browser.execute_script("arguments[0].click();", termin_buchen_button)
+                    browser.execute_script("arguments[0].click();", termin_buchen_button)
 
                     # If we got until here, assume we were successful
                     logging.warning("Booked.")

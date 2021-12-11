@@ -14,7 +14,7 @@ def parse_appointment_date(possible_date_raw_string):
     return appointment_datetime.date()
 
 
-def parse_latest_possible_date(latest_date_raw_string):
+def parse_user_required_date(latest_date_raw_string):
     """
     Parses the raw date string provided by the user as an argument into a datetime date.
 
@@ -32,4 +32,4 @@ def is_appointment_until(possible_date_raw_string, latest_date_raw_string):
     :param latest_date_raw_string:
     :return:
     """
-    return parse_appointment_date(possible_date_raw_string) <= parse_latest_possible_date(latest_date_raw_string)
+    return parse_appointment_date(possible_date_raw_string) <= parse_user_required_date(latest_date_raw_string)

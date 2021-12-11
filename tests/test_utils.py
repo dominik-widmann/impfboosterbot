@@ -1,7 +1,7 @@
 import datetime
 from unittest import TestCase
 
-from src.utils import parse_appointment_date, parse_latest_possible_date, is_appointment_until
+from src.utils import parse_appointment_date, parse_user_required_date, is_appointment_until
 
 
 class Test(TestCase):
@@ -11,8 +11,8 @@ class Test(TestCase):
         self.assertEqual(appointment_date, datetime.date(2021, 12, 13))
 
     def test_parse_latest_possible_date(self):
-        latest_date = parse_latest_possible_date('2021-12-15')
-        self.assertEqual(latest_date, datetime.date(2021,12,15))
+        latest_date = parse_user_required_date('2021-12-15')
+        self.assertEqual(latest_date, datetime.date(2021, 12, 15))
 
     def test_is_appointment_until(self):
         self.assertTrue(is_appointment_until('Sonntag 12.12.2021 um 15:30 Uhr', '2021-12-13'))

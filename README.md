@@ -2,7 +2,7 @@
 
 [![Run unittests](https://github.com/dominik-widmann/impfboosterbot/actions/workflows/unittests.yaml/badge.svg)](https://github.com/dominik-widmann/impfboosterbot/actions/workflows/unittests.yaml)
 
-Bot that books booster vaccines at the Bayerische Impfzentrum.
+Bot that books vaccination appointments at the Bayerisches Impfzentrum.
 
 Please use with care and at your own risk!
 

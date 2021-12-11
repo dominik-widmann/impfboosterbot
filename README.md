@@ -24,6 +24,8 @@ Make sure you followed all installation steps and activated your venv. Then from
 python main.py -h
 usage: main.py [-h] username password person_number earliest_date
 
+Find and book a vaccination appointment at the Bavarian Vaccination Center.
+
 positional arguments:
   username
   password

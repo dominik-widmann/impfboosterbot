@@ -97,7 +97,7 @@ if __name__ == '__main__':
                     termin_verfuegbar = True
                     break
                 else:
-                    logger.warning("Skipping this appointment, since it is after" + args.latest_date)
+                    logger.warning("Skipping this appointment, since it is after " + args.latest_date)
 
             except:
                 # no Termin found

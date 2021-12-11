@@ -10,7 +10,7 @@ from selenium.webdriver.common.by import By
 if __name__ == '__main__':
     import argparse
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='Find and book a vaccination appointment at the Bavarian Vaccination Center.')
     parser.add_argument('username')
     parser.add_argument('password')
     parser.add_argument('person_number', help='Number of the person in the Impfzentrumsaccount. Starts with 1.')

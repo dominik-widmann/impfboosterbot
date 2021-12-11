@@ -28,7 +28,7 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger('Impfterminbucher')
 
-    # Check input makes sense
+    # Check that input makes sense
     assert parse_user_required_date(args.earliest_date) <= parse_user_required_date(args.latest_date), \
         "'latest_date' must be equal to or after 'earliest_date'"
 
@@ -90,14 +90,14 @@ if __name__ == '__main__':
                     # book
                     termin_buchen_xpath = '//*[@id="main"]/div/div/form/nav/button[2]'
                     termin_buchen_button = browser.find_element('xpath', termin_buchen_xpath)
-                    browser.execute_script("arguments[0].click();", termin_buchen_button)
+                    #browser.execute_script("arguments[0].click();", termin_buchen_button)
 
                     # If we got until here, assume we were successful
                     logging.warning("Booked.")
                     termin_verfuegbar = True
                     break
                 else:
-                    logger.warning("Skipping this appointment, since it is after" + args.latest_data)
+                    logger.warning("Skipping this appointment, since it is after" + args.latest_date)
 
             except:
                 # no Termin found

@@ -1,0 +1,22 @@
+# This is a github action to run all unittests
+name: Run unittests
+
+on: push
+
+jobs:
+  unittests:
+    name: Unittest impfboosterbot
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+
+      - name: install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Run the unittests
+        run: |
+          python -m unittest discover tests
+        shell: bash

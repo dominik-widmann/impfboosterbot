@@ -22,14 +22,16 @@ Make sure you followed all installation steps and activated your venv. Then from
 
 ```bash
 python main.py -h
-usage: main.py [-h] username password person_number
+usage: main.py [-h] username password person_number earliest_date
 
 positional arguments:
   username
   password
   person_number  Number of the person in the Impfzentrumsaccount. Starts with 1.
+  earliest_date  Earliest date to book an appointment. Needs to be of the form 'YYYY-MM-DD'
 
 optional arguments:
   -h, --help     show this help message and exit
+
 
 ```

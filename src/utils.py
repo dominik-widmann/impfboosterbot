@@ -9,7 +9,7 @@ def parse_appointment_date(possible_date_raw_string):
     :param possible_date_raw_string: e.g. 'Sonntag 12.12.2021 um 15:30 Uhr'
     :return: datetime.date
     """
-    locale.setlocale(locale.LC_ALL, 'de_DE')
+    locale.setlocale(locale.LC_ALL, 'de_DE.UTF-8')
     appointment_datetime = datetime.datetime.strptime(possible_date_raw_string, '%A %x um %H:%M Uhr')
     return appointment_datetime.date()
 

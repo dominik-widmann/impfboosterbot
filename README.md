@@ -41,3 +41,8 @@ optional arguments:
 
 
 ```
+
+Example run:
+```bash
+python main.py user@somemail.de dummypassword 1 '2022-01-04' '2022-01-12'
+```

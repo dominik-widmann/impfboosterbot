@@ -3,6 +3,7 @@ from random import random
 from selenium import webdriver
 import time
 import logging
+
 logging.basicConfig(format='%(asctime)s %(message)s')
 from selenium.webdriver.common.by import By
 
@@ -13,6 +14,8 @@ if __name__ == '__main__':
     parser.add_argument('username')
     parser.add_argument('password')
     parser.add_argument('person_number', help='Number of the person in the Impfzentrumsaccount. Starts with 1.')
+    parser.add_argument('earliest_date', help="Earliest date to book an appointment. Needs to be of the form "
+                                              "'YYYY-MM-DD'")
     args = parser.parse_args()
 
     logging.root.setLevel(logging.INFO)
@@ -51,6 +54,12 @@ if __name__ == '__main__':
     termin_verfuegbar = False
     while not termin_verfuegbar:
         try:
+            # Wünsche wählen
+            termin_xpath = '//*[@id="earliestDate"]'
+            termin_element = browser.find_element(By.XPATH, termin_xpath)
+            termin_element.click()
+            termin_element.send_keys(args.earliest_date)
+
             # Nächsten Termin anzeigen
             naechster_termin_anzeigen_xpath = '//*[@id="main"]/div/div/form/div/button'
             temrin_anzeigen_button = browser.find_element('xpath', naechster_termin_anzeigen_xpath)

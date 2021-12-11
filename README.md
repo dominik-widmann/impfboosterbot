@@ -4,7 +4,7 @@ Bot that books booster vaccines at the Bayerische Impfzentrum.
 Please use with care and at your own risk!
 
 ## Requirements
-* A user account at https://impfzentren.bayern/ 
+* A user account at https://impfzentren.bayern/. You need to have the Impfzentrum selected at which you want to book an appointment.
 * Firefox installed
 * Geckodriver installed: install the firefox selenium driver and make sure it is on your path (e.g. by installing it to /usr/local/bin/). https://github.com/mozilla/geckodriver/releases
 

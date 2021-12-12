@@ -44,4 +44,4 @@ python main.by santa@claus.com secretpassword 2 2021-12-24 2021-12-26
 ```
 
 ## Thanks
-Thank you for getting vaccinated. Feel free to [buy me a coffee](www.Ko-fi.com/dominikwidmann) if you enjoyed using the bot :)
+Thank you for getting vaccinated. Feel free to [buy me a coffee](https://ko-fi.com/dominikwidmann) if you enjoyed using the bot :)

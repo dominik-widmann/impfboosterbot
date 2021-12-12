@@ -33,7 +33,7 @@ If you followed the installation steps above, provide the bot with the following
 and execute it as follows: 
 
 ```bash
-python3 main.py username password person_number earliest_date latest_date
+python main.py username password person_number earliest_date latest_date
 ```
 Once the bot has found an appointment, it will terminate and print the appointment on the command line. It should also be visible in your account now. _Note that the Bayrisches Impfzentrum often only provides appointments in the next 1-2 weeks._
 

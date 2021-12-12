@@ -1,18 +1,22 @@
-# Impfboosterbot
+# Bavarian Booster Bot
+##### Bot to book COVID vaccination appointments at the Bayrisches Impfzentrum.  
 
-[![Run unittests](https://github.com/dominik-widmann/impfboosterbot/actions/workflows/unittests.yaml/badge.svg)](https://github.com/dominik-widmann/impfboosterbot/actions/workflows/unittests.yaml)
+[![unittests](https://github.com/dominik-widmann/impfboosterbot/actions/workflows/unittests.yaml/badge.svg)](https://github.com/dominik-widmann/impfboosterbot/actions/workflows/unittests.yaml)
 
-Bot that books vaccination appointments at the Bayerisches Impfzentrum.
+The Bayrisches Impfzentrum provides only a very limited number of COVID vaccination slots that are often fully booked very quickly. To avoid having to sit in front of the website hiting refresh until you are lucky to get a slot, you can use this bot to do the work for you.
 
-Please use with care and at your own risk!
+The bot logs into your account at the Bayrisches Impfzentrum and automatically books the next free slot in the time frame you specified. _If you cannot attend the appointment, it is always possible to cancel and re-run the bot to book a different slot._ Please use with care and at your own risk.
 
 ## Requirements
-* A user account at https://impfzentren.bayern/ with your username and password. You need to have the Impfzentrum selected at which you want to book an appointment.
-* Firefox installed
-* Geckodriver installed: install the firefox selenium driver and make sure it is on your path (e.g. by installing it to /usr/local/bin/). https://github.com/mozilla/geckodriver/releases
+* **User account at [impfzentren.bayern](https://impfzentren.bayern):** You will need to supply the bot with your username and password.
+* **Person registrated:** In your account, you need to click `+ Person hinzufügen` to register a person. Later, you will need to supply the bot with a number to reference which person you want to book the appointment for. Numbers start from 1 and increase by 1 from left to right as the persons are shown in your account.
+* **Impfzentrum selected:** For this person, you need to have the vaccination site (Impfzentrum) selected at which you want to book an appointment (`Person auswählen > Impfzentrum auswählen`).
+* **Firefox:** Get it [here](https://www.mozilla.org/en-US/firefox/new/).
+* **Python:** Get it [here](https://www.python.org/downloads/).
+* **Geckodriver:** Install the firefox selenium driver following these [instructions](https://github.com/mozilla/geckodriver/releases) and make sure it is on your path (e.g. by installing it to `/usr/local/bin/`).
 
 ## Installation
-Make sure all packages from requirements.txt are available in your environment. You can use venv for that:
+Open your favorite command line tool and run the following commands to install all packages from `requirements.txt`:
 
 ```bash
 python3 -m venv impfenv
@@ -21,28 +25,24 @@ pip install -r requirements.txt
 ```
 
 ## Usage
-Make sure you followed all installation steps and activated your venv. Then from within your venv run main.py. The usage is as follows:
+If you followed the installation steps above, provide the bot with the following arguments:
+* `username` and `password` from your user account at [impfzentren.bayern](https://impfzentren.bayern).
+* `person_number` of the person in your user account you want to book the appointment for as one account can contain mutiple persons.
+* the `earliest_date` and `latest_date` of the time frame you want to book an appointment in (in the format `YYYY-MM-DD`).
+
+and execute it as follows: 
 
 ```bash
- python main.py -h
-usage: main.py [-h] username password person_number earliest_date latest_date
-
-Find and book a vaccination appointment at the Bavarian Vaccination Center.
-
-positional arguments:
-  username
-  password
-  person_number  Number of the person in the Impfzentrumsaccount. Starts with 1.
-  earliest_date  Earliest date to book an appointment at. Needs to be of the form 'YYYY-MM-DD'
-  latest_date    Latest date to book an appointment at. Needs to be of the form 'YYYY-MM-DD'
-
-optional arguments:
-  -h, --help     show this help message and exit
-
-
+python3 main.py username password person_number earliest_date latest_date
 ```
+Once the bot has found an appointment, it will terminate and print the appointment on the command line. It should also be visible in your account now. _Note that the Bayrisches Impfzentrum often only provides appointments in the next 1-2 weeks._
 
-Example run:
+## Example 
+Let's assume that Santa Claus has two people registered in his account, Nikolaus and Rudolf. Rudolf is shown as the second person on Santa's account. He wants to have his Corona vaccination appointment between December 24th and December 26th 2021. Thus, Santa runs the bot as follows:
 ```bash
-python main.py user@somemail.de dummypassword 1 '2022-01-04' '2022-01-12'
+python main.by santa@claus.com secretpassword 2 2021-12-24 2021-12-26
 ```
+
+## Thanks
+
+Thank you for getting vaccinated. Feel free to [buy me a coffee](https://www.buymeacoffee.com/dominikwidmann) if you enjoyed using the bot :)

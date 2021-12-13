@@ -1,5 +1,5 @@
 # Bavarian Booster Bot
-##### Bot to book COVID vaccination appointments at the Bayrisches Impfzentrum.  
+##### This is a bot that conveniently books COVID vaccination appointments at the Bayrisches Impfzentrum for you.  
 
 [![unittests](https://github.com/dominik-widmann/impfboosterbot/actions/workflows/unittests.yaml/badge.svg)](https://github.com/dominik-widmann/impfboosterbot/actions/workflows/unittests.yaml)
 

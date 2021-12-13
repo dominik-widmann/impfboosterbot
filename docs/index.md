@@ -1,11 +1,13 @@
 # Bavarian Booster Bot
-##### Bot to book COVID vaccination appointments at the Bayrisches Impfzentrum.  
+##### This is a bot that conveniently books COVID vaccination appointments at the Bayrisches Impfzentrum for you.  
 
 [![unittests](https://github.com/dominik-widmann/impfboosterbot/actions/workflows/unittests.yaml/badge.svg)](https://github.com/dominik-widmann/impfboosterbot/actions/workflows/unittests.yaml)
 
 The Bayrisches Impfzentrum provides only a very limited number of COVID vaccination slots that are often fully booked very quickly. To avoid having to sit in front of the website hiting refresh until you are lucky to get a slot, you can use this bot to do the work for you.
 
-The bot logs into your account at the Bayrisches Impfzentrum and automatically books the next free slot in the time frame you specified. _If you cannot attend the appointment, it is always possible to cancel and re-run the bot to book a different slot._ Please use with care and at your own risk.
+The bot logs into your account at the Bayrisches Impfzentrum and automatically books the next free slot in the time frame you specified. _If you cannot attend the appointment, it is possible to cancel and re-run the bot to book a different slot._ 
+
+Please use this bot responsibly and at your own risk.
 
 ## Requirements
 * **User account at [impfzentren.bayern](https://impfzentren.bayern):** You will need to supply the bot with your username and password.

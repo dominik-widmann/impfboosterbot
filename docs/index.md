@@ -1,37 +1,47 @@
-## Welcome to GitHub Pages
+# Bavarian Booster Bot
+##### Bot to book COVID vaccination appointments at the Bayrisches Impfzentrum.  
 
-You can use the [editor on GitHub](https://github.com/dominik-widmann/impfboosterbot/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
+[![unittests](https://github.com/dominik-widmann/impfboosterbot/actions/workflows/unittests.yaml/badge.svg)](https://github.com/dominik-widmann/impfboosterbot/actions/workflows/unittests.yaml)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+The Bayrisches Impfzentrum provides only a very limited number of COVID vaccination slots that are often fully booked very quickly. To avoid having to sit in front of the website hiting refresh until you are lucky to get a slot, you can use this bot to do the work for you.
 
-### Markdown
+The bot logs into your account at the Bayrisches Impfzentrum and automatically books the next free slot in the time frame you specified. _If you cannot attend the appointment, it is always possible to cancel and re-run the bot to book a different slot._ Please use with care and at your own risk.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Requirements
+* **User account at [impfzentren.bayern](https://impfzentren.bayern):** You will need to supply the bot with your username and password.
+* **Person registrated:** In your account, you need to click `+ Person hinzufügen` to register a person. Later, you will need to supply the bot with a number to reference which person you want to book the appointment for. Numbers start from 1 and increase by 1 from left to right as the persons are shown in your account.
+* **Impfzentrum selected:** For this person, you need to have the vaccination site (Impfzentrum) selected at which you want to book an appointment (`Person auswählen > Impfzentrum auswählen`).
+* **Firefox:** Get it [here](https://www.mozilla.org/en-US/firefox/new/).
+* **Python:** Get it [here](https://www.python.org/downloads/).
+* **Geckodriver:** Install the firefox selenium driver following these [instructions](https://github.com/mozilla/geckodriver/releases) and make sure it is on your path (e.g. by installing it to `/usr/local/bin/`).
 
-```markdown
-Syntax highlighted code block
+## Installation
+Open your favorite command line tool and run the following commands to install all packages from `requirements.txt`:
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```bash
+python3 -m venv impfenv
+source impfenv/bin/activate
+pip install -r requirements.txt 
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+## Usage
+If you followed the installation steps above, provide the bot with the following arguments:
+* `username` and `password` from your user account at [impfzentren.bayern](https://impfzentren.bayern).
+* `person_number` of the person in your user account you want to book the appointment for as one account can contain mutiple persons.
+* the `earliest_date` and `latest_date` of the time frame you want to book an appointment in (in the format `YYYY-MM-DD`).
 
-### Jekyll Themes
+and execute it as follows: 
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/dominik-widmann/impfboosterbot/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```bash
+python main.py username password person_number earliest_date latest_date
+```
+Once the bot has found an appointment, it will terminate and print the appointment on the command line. It should also be visible in your account now. _Note that the Bayrisches Impfzentrum often only provides appointments in the next 1-2 weeks._
 
-### Support or Contact
+## Example 
+Let's assume that Santa Claus has two people registered in his account, Nikolaus and Rudolf. Rudolf is shown as the second person on Santa's account. He wants to have his Corona vaccination appointment between December 24th and December 26th 2021. Thus, Santa runs the bot as follows:
+```bash
+python main.by santa@claus.com secretpassword 2 2021-12-24 2021-12-26
+```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Thanks
+Thank you for getting vaccinated. Feel free to [buy me a coffee](https://ko-fi.com/dominikwidmann) if you enjoyed using the bot :)

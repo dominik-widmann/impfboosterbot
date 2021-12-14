@@ -18,9 +18,11 @@ Please use this bot responsibly and at your own risk.
 * **Geckodriver:** Install the firefox selenium driver following these [instructions](https://github.com/mozilla/geckodriver/releases) and make sure it is on your path (e.g. by installing it to `/usr/local/bin/`).
 
 ## Installation
-Open your favorite command line tool and run the following commands to install all packages from `requirements.txt`:
+Open your favorite command line tool and run the following commands to download the impfboosterbot and install all packages from `requirements.txt`:
 
 ```bash
+git clone https://github.com/dominik-widmann/impfboosterbot.git
+cd impfboosterbot
 python3 -m venv impfenv
 source impfenv/bin/activate
 pip install -r requirements.txt 
@@ -32,8 +34,7 @@ If you followed the installation steps above, provide the bot with the following
 * `person_number` of the person in your user account you want to book the appointment for as one account can contain mutiple persons.
 * the `earliest_date` and `latest_date` of the time frame you want to book an appointment in (in the format `YYYY-MM-DD`).
 
-and execute it as follows: 
-
+Then from within the impfboosterbot folder execute it as follows: 
 ```bash
 python main.py username password person_number earliest_date latest_date
 ```

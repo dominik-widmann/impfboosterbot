@@ -17,7 +17,7 @@ GECKO_LINUX = './include/linux/geckodriver'
 GECKO_WINDOWS = './include/windows/geckodriver.exe'
 
 
-def getGeckoDriverForOS():
+def get_gecko_driver_for_OS():
     """
     Returns the path to the gecko executable. If in doubt, assume windows.
     :return:
@@ -30,20 +30,17 @@ def getGeckoDriverForOS():
         return GECKO_WINDOWS
 
 
+def run_bot(username, password, person_number, earliest_date, latest_date):
+    """
+    Run the bot with acoount parameters.
 
-if __name__ == '__main__':
-    import argparse
-
-    parser = argparse.ArgumentParser(
-        description='Find and book a vaccination appointment at the Bavarian Vaccination Center.')
-    parser.add_argument('username')
-    parser.add_argument('password')
-    parser.add_argument('person_number', help='Number of the person in the Impfzentrumsaccount. Starts with 1.')
-    parser.add_argument('earliest_date', help="Earliest date to book an appointment at. Needs to be of the form "
-                                              "'YYYY-MM-DD'")
-    parser.add_argument('latest_date', help="Latest date to book an appointment at. Needs to be of the form "
-                                            "'YYYY-MM-DD'")
-    args = parser.parse_args()
+    :param username:
+    :param password:
+    :param person_number:
+    :param earliest_date:
+    :param latest_date:
+    :return:
+    """
 
     # Prepare logging
     logging.root.setLevel(logging.INFO)
@@ -51,11 +48,11 @@ if __name__ == '__main__':
     logger = logging.getLogger('Impfterminbucher')
 
     # Check that input makes sense
-    assert parse_user_required_date(args.earliest_date) <= parse_user_required_date(args.latest_date), \
+    assert parse_user_required_date(earliest_date) <= parse_user_required_date(latest_date), \
         "'latest_date' must be equal to or after 'earliest_date'"
 
     # Start browser
-    firefox_service = Service(getGeckoDriverForOS())
+    firefox_service = Service(get_gecko_driver_for_OS())
     browser = webdriver.Firefox(service=firefox_service)
     url = 'https://ciam.impfzentren.bayern/auth/realms/C19V-Citizen/protocol/openid-connect/auth?client_id=c19v-frontend&redirect_uri=https%3A%2F%2Fimpfzentren.bayern%2Fcitizen%2F&state=c5c6e344-a034-4bfc-8a16-82d223932875&response_mode=fragment&response_type=code&scope=openid&nonce=15b8b742-4fd4-487b-a5de-759ffdb44008&ui_locales=de'
 
@@ -66,15 +63,15 @@ if __name__ == '__main__':
     username_xpath = '//*[@id="username"]'
     password_xpath = '//*[@id="password"]'
     login_button_xpath = '//*[@id="kc-login"]'
-    browser.find_element('xpath', username_xpath).send_keys(args.username)
-    browser.find_element('xpath', password_xpath).send_keys(args.password)
+    browser.find_element('xpath', username_xpath).send_keys(username)
+    browser.find_element('xpath', password_xpath).send_keys(password)
     browser.find_element('xpath', login_button_xpath).click()
 
     # wait for redirect
     time.sleep(2)
 
     # Choose person
-    person_xpath = "//*[@id='main']/div/div/div[1]/div[" + str(args.person_number) + "]/section/a"
+    person_xpath = "//*[@id='main']/div/div/div[1]/div[" + str(person_number) + "]/section/a"
     person_button = browser.find_element(By.XPATH, person_xpath)
     browser.execute_script("arguments[0].click();",
                            person_button)  # use this executor to click as normal way doesnt work
@@ -93,7 +90,7 @@ if __name__ == '__main__':
             termin_xpath = '//*[@id="earliestDate"]'
             termin_element = browser.find_element(By.XPATH, termin_xpath)
             termin_element.click()
-            termin_element.send_keys(args.earliest_date)
+            termin_element.send_keys(earliest_date)
 
             # Show next appointment
             naechster_termin_anzeigen_xpath = '//*[@id="main"]/div/div/form/div/button'
@@ -107,7 +104,7 @@ if __name__ == '__main__':
                 logger.warning("Found Appointment: " + termin_text)
 
                 # Check if Termin is convenient
-                is_convenient = is_appointment_until(termin_text, args.latest_date)
+                is_convenient = is_appointment_until(termin_text, latest_date)
 
                 if is_convenient:
                     # book
@@ -120,7 +117,7 @@ if __name__ == '__main__':
                     termin_verfuegbar = True
                     break
                 else:
-                    logger.warning("Skipping this appointment, since it is after " + args.latest_date)
+                    logger.warning("Skipping this appointment, since it is after " + latest_date)
 
             except:
                 # no Termin found
@@ -134,3 +131,20 @@ if __name__ == '__main__':
         browser.refresh()
         random_wait = random()
         time.sleep(1 + random_wait)
+
+
+if __name__ == '__main__':
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description='Find and book a vaccination appointment at the Bavarian Vaccination Center.')
+    parser.add_argument('username')
+    parser.add_argument('password')
+    parser.add_argument('person_number', help='Number of the person in the Impfzentrumsaccount. Starts with 1.')
+    parser.add_argument('earliest_date', help="Earliest date to book an appointment at. Needs to be of the form "
+                                              "'YYYY-MM-DD'")
+    parser.add_argument('latest_date', help="Latest date to book an appointment at. Needs to be of the form "
+                                            "'YYYY-MM-DD'")
+    args = parser.parse_args()
+
+    run_bot(args.username, args.password, args.person_number, args.earliest_date, args.latest_date)

@@ -1,0 +1,1 @@
+pyinstaller main.py --name impfboosterbot --onefile

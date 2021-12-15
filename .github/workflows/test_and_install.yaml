@@ -38,6 +38,7 @@ jobs:
           pip install -r requirements.txt
       - name: Run the unittests
         run: |
+          source impfenv/bin/activate
           python -m unittest discover tests
         shell: bash
       - name: Build executable

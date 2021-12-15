@@ -41,7 +41,9 @@ jobs:
           python -m unittest discover tests
         shell: bash
       - name: Build executable
-        run: ./generate_binaries_macOS.sh
+        run: |
+          source impfenv/bin/activate
+          ./generate_binaries_macOS.sh
         shell: bash
       - uses: actions/upload-artifact@v2
         with:

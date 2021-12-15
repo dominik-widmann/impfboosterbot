@@ -1,1 +1,1 @@
-pyinstaller launcher.py --name impfboosterbot --add-binary ./include/macOS/geckodriver:. --noconfirm
+pyinstaller launcher.py --name impfboosterbot --add-binary ./include/macOS/geckodriver:. --noconfirm --onefile

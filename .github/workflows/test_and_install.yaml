@@ -48,8 +48,31 @@ jobs:
         shell: bash
       - uses: actions/upload-artifact@v2
         with:
+          name: impfboosterbot_macOS_x86_64
           path: dist/impfboosterbot_macOS_x86_64
+
+  buildwindows:
+    name: Build for win64
+    runs-on: windows-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+      - name: install dependencies
+        run: |
+          python3 -m venv impfenv
+          source impfenv/bin/activate
+          pip install -r requirements.txt
+      - name: Run the unittests
+        run: |
+          source impfenv/bin/activate
+          python -m unittest discover tests
+        shell: bash
+      - name: Build executable
+        run: |
+          source impfenv/bin/activate
+          ./generate_binaries_windows.sh
+        shell: bash
       - uses: actions/upload-artifact@v2
         with:
-          path: dist/impfboosterbot_macOS_arm64
-
+          name:
+          path: dist/impfboosterbot_win64

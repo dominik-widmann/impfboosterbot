@@ -4,6 +4,7 @@ from selenium import webdriver
 import time
 import logging
 import platform
+import os
 
 from selenium.webdriver.firefox.service import Service
 
@@ -15,13 +16,16 @@ from selenium.webdriver.common.by import By
 GECKO_MAC = './include/macOS/geckodriver'
 GECKO_LINUX = './include/linux/geckodriver'
 GECKO_WINDOWS = './include/windows/geckodriver.exe'
+GECKO_COMPILED = 'geckodriver'
 
-
-def get_gecko_driver_for_OS():
+def get_gecko_driver_for_OS(iscompiled):
     """
     Returns the path to the gecko executable. If in doubt, assume windows.
     :return:
     """
+    if iscompiled:
+        return os.path.join(os.path.dirname(os.path.abspath(__file__)), GECKO_COMPILED)
+
     if platform.system() == 'Darwin':
         return GECKO_MAC
     elif platform.system() == 'Linux':
@@ -30,15 +34,15 @@ def get_gecko_driver_for_OS():
         return GECKO_WINDOWS
 
 
-def run_bot(username, password, person_number, earliest_date, latest_date):
+def run_bot(username, password, person_number, earliest_date, latest_date, iscompiled):
     """
-    Run the bot with acoount parameters.
 
     :param username:
     :param password:
     :param person_number:
     :param earliest_date:
     :param latest_date:
+    :param iscompiled:
     :return:
     """
 
@@ -52,7 +56,7 @@ def run_bot(username, password, person_number, earliest_date, latest_date):
         "'latest_date' must be equal to or after 'earliest_date'"
 
     # Start browser
-    firefox_service = Service(get_gecko_driver_for_OS())
+    firefox_service = Service(get_gecko_driver_for_OS(iscompiled))
     browser = webdriver.Firefox(service=firefox_service)
     url = 'https://ciam.impfzentren.bayern/auth/realms/C19V-Citizen/protocol/openid-connect/auth?client_id=c19v-frontend&redirect_uri=https%3A%2F%2Fimpfzentren.bayern%2Fcitizen%2F&state=c5c6e344-a034-4bfc-8a16-82d223932875&response_mode=fragment&response_type=code&scope=openid&nonce=15b8b742-4fd4-487b-a5de-759ffdb44008&ui_locales=de'
 
@@ -147,4 +151,4 @@ if __name__ == '__main__':
                                             "'YYYY-MM-DD'")
     args = parser.parse_args()
 
-    run_bot(args.username, args.password, args.person_number, args.earliest_date, args.latest_date)
+    run_bot(args.username, args.password, args.person_number, args.earliest_date, args.latest_date, iscompiled=False)

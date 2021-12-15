@@ -25,4 +25,4 @@ if __name__ == '__main__':
     latest_date = input("Please enter the latest date that works for you in the format 'YYYY-MM-DD': ")
 
     # start the bot
-    run_bot(username, password, person_number, earliest_date, latest_date)
+    run_bot(username, password, person_number, earliest_date, latest_date, iscompiled=True)

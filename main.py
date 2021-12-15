@@ -3,11 +3,33 @@ from random import random
 from selenium import webdriver
 import time
 import logging
+import platform
+
+from selenium.webdriver.firefox.service import Service
 
 from src.utils import is_appointment_until, parse_user_required_date
 
 logging.basicConfig(format='%(asctime)s %(message)s')
 from selenium.webdriver.common.by import By
+
+GECKO_MAC = './include/macOS/geckodriver'
+GECKO_LINUX = './include/linux/geckodriver'
+GECKO_WINDOWS = './include/windows/geckodriver.exe'
+
+
+def getGeckoDriverForOS():
+    """
+    Returns the path to the gecko executable. If in doubt, assume windows.
+    :return:
+    """
+    if platform.system() == 'Darwin':
+        return GECKO_MAC
+    elif platform.system() == 'Linux':
+        return GECKO_LINUX
+    else:
+        return GECKO_WINDOWS
+
+
 
 if __name__ == '__main__':
     import argparse
@@ -33,7 +55,8 @@ if __name__ == '__main__':
         "'latest_date' must be equal to or after 'earliest_date'"
 
     # Start browser
-    browser = webdriver.Firefox()
+    firefox_service = Service(getGeckoDriverForOS())
+    browser = webdriver.Firefox(service=firefox_service)
     url = 'https://ciam.impfzentren.bayern/auth/realms/C19V-Citizen/protocol/openid-connect/auth?client_id=c19v-frontend&redirect_uri=https%3A%2F%2Fimpfzentren.bayern%2Fcitizen%2F&state=c5c6e344-a034-4bfc-8a16-82d223932875&response_mode=fragment&response_type=code&scope=openid&nonce=15b8b742-4fd4-487b-a5de-759ffdb44008&ui_locales=de'
 
     # open the website

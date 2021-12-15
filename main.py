@@ -13,21 +13,25 @@ from src.utils import is_appointment_until, parse_user_required_date
 logging.basicConfig(format='%(asctime)s %(message)s')
 from selenium.webdriver.common.by import By
 
-GECKO_MAC = './include/macOS/geckodriver'
-GECKO_LINUX = './include/linux/geckodriver'
-GECKO_WINDOWS = './include/windows/geckodriver.exe'
+GECKO_MAC_x86_64 = './include/macOS/x86_64/geckodriver'
+GECKO_MAC_arm64 = './include/macOS/arm64/geckodriver'
+GECKO_LINUX = './include/linux64/geckodriver'
+GECKO_WINDOWS = './include/win64/geckodriver.exe'
 GECKO_COMPILED = 'geckodriver'
 
 def get_gecko_driver_for_OS(iscompiled):
     """
-    Returns the path to the gecko executable. If in doubt, assume windows.
+    Returns the path to the gecko executable. If in doubt, assume win64.
     :return:
     """
     if iscompiled:
         return os.path.join(os.path.dirname(os.path.abspath(__file__)), GECKO_COMPILED)
 
     if platform.system() == 'Darwin':
-        return GECKO_MAC
+        if platform.machine() == 'x86_64':
+            return GECKO_MAC_x86_64
+        else:
+            return GECKO_MAC_arm64
     elif platform.system() == 'Linux':
         return GECKO_LINUX
     else:

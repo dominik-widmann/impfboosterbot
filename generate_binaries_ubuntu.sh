@@ -1,0 +1,1 @@
+pyinstaller launcher.py --add-binary ./include/linux64/geckodriver:. --noconfirm --onefile --name impfboosterbot_linux64

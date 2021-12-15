@@ -1,0 +1,51 @@
+# This is a github action to run all unittests
+name: Test and build
+
+on: push
+
+jobs:
+  unittests:
+    name: Unittest impfboosterbot
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+
+      - name: install dependencies
+        run: |
+          export LC_ALL="en_US.UTF-8"
+          export LC_CTYPE="en_US.UTF-8"
+          sudo apt-get install language-pack-de
+          sudo dpkg-reconfigure locales
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Run the unittests
+        run: |
+          python -m unittest discover tests
+        shell: bash
+
+  buildmac:
+    name: Build for macOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+      - name: install dependencies
+        run: |
+          export LC_ALL="en_US.UTF-8"
+          export LC_CTYPE="en_US.UTF-8"
+          sudo apt-get install language-pack-de
+          sudo dpkg-reconfigure locales
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Build executable
+        run: ./generate_binaries_macOS.sh
+        shell: bash
+      - uses: actions/upload-artifact@v2
+        with:
+          path: dist/impfboosterbot_macOS_x86_64
+      - uses: actions/upload-artifact@v2
+        with:
+          path: dist/impfboosterbot_macOS_arm64
+

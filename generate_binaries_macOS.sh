@@ -1,0 +1,2 @@
+pyinstaller launcher.py --add-binary ./include/macOS/x86_64/geckodriver:. --noconfirm --onefile --target-architecture x86_64 --name impfboosterbot_macOS_x86_64
+pyinstaller launcher.py --add-binary ./include/macOS/arm64/geckodriver:. --noconfirm --onefile --target-architecture arm64 --name impfboosterbot_macOS_arm64

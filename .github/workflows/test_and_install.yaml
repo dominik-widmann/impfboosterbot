@@ -33,8 +33,9 @@ jobs:
         uses: actions/checkout@v2
       - name: install dependencies
         run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          python3 -m venv impfenv
+          source impfenv/bin/activate
+          pip install -r requirements.txt
       - name: Run the unittests
         run: |
           python -m unittest discover tests

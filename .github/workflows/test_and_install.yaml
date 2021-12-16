@@ -7,7 +7,6 @@ jobs:
   buildlinux:
     name: Build for linux
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
@@ -29,7 +28,7 @@ jobs:
         run: |
           source impfenv/bin/activate
           ./generate_binaries_ubuntu.sh
-       shell: bash
+        shell: bash
       - uses: actions/upload-artifact@v2
         with:
           name: impfboosterbot_linux64

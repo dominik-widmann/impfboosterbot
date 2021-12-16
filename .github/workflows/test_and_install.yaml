@@ -1,4 +1,4 @@
-# This is a github action to run all unittests
+# This is a github action to run tests and build binaries
 name: Test and build
 
 on: push
@@ -68,15 +68,13 @@ jobs:
         uses: actions/checkout@v2
       - name: install dependencies
         run: |
-          python3 -m venv impfenv
-          source impfenv/bin/activate
-          pip install -r requirements.txt
-        shell: bash
+          python -m venv impfenv
+          impfenv/Scripts/Activate.ps1
+          python -m pip install -r requirements.txt
       - name: Run the unittests
         run: |
-          source impfenv/bin/activate
+          impfenv/Scripts/Activate.ps1
           python -m unittest discover tests
-        shell: bash
       - name: Build executable
         run: |
           source impfenv/bin/activate

@@ -77,7 +77,7 @@ jobs:
           python -m unittest discover tests
       - name: Build executable
         run: |
-          source impfenv/bin/activate
+          . impfenv/Scripts/activate
           ./generate_binaries_windows.sh
         shell: bash
       - uses: actions/upload-artifact@v2

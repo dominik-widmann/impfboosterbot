@@ -55,10 +55,14 @@ jobs:
           source impfenv/bin/activate
           ./generate_binaries_macOS.sh
         shell: bash
+      - name: Tar executable
+        run: |
+          cd dist
+          tar -cvf impfboosterbot_macOS_x86_64.tar impfboosterbot_macOS_x86_64
       - uses: actions/upload-artifact@v2
         with:
           name: impfboosterbot_macOS_x86_64
-          path: dist/impfboosterbot_macOS_x86_64
+          path: dist/impfboosterbot_macOS_x86_64.tar
 
   buildwindows:
     name: Build for win64

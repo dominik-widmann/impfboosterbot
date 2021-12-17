@@ -88,6 +88,11 @@ jobs:
           . impfenv/Scripts/activate
           ./generate_binaries_windows.sh
         shell: bash
+      - name: Tar executable
+        run: |
+          cd dist
+          tar -cvf impfboosterbot_win64.tar impfboosterbot_win64.exe
+        shell: bash
       - uses: actions/upload-artifact@v2
         with:
           name: impfboosterbot_win64

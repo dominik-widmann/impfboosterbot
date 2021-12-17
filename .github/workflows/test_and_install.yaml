@@ -1,0 +1,94 @@
+# This is a github action to run tests and build binaries
+name: Test and build
+
+on: push
+
+jobs:
+  buildlinux:
+    name: Build for linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+      - name: install dependencies
+        run: |
+          export LC_ALL="en_US.UTF-8"
+          export LC_CTYPE="en_US.UTF-8"
+          sudo apt-get install language-pack-de
+          sudo dpkg-reconfigure locales
+          python3 -m venv impfenv
+          source impfenv/bin/activate
+          pip install -r requirements.txt
+      - name: Run the unittests
+        run: |
+          source impfenv/bin/activate
+          python -m unittest discover tests
+        shell: bash
+      - name: Build executable
+        run: |
+          source impfenv/bin/activate
+          ./generate_binaries_ubuntu.sh
+        shell: bash
+      - name: Tar executable
+        run: |
+          cd dist
+          tar -cvf impfboosterbot_linux64.tar impfboosterbot_linux64
+      - uses: actions/upload-artifact@v2
+        with:
+          name: impfboosterbot_linux64
+          path: dist/impfboosterbot_linux64.tar
+
+  buildmac:
+    name: Build for macOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+      - name: install dependencies
+        run: |
+          python3 -m venv impfenv
+          source impfenv/bin/activate
+          pip install -r requirements.txt
+      - name: Run the unittests
+        run: |
+          source impfenv/bin/activate
+          python -m unittest discover tests
+        shell: bash
+      - name: Build executable
+        run: |
+          source impfenv/bin/activate
+          ./generate_binaries_macOS.sh
+        shell: bash
+      - name: Tar executable
+        run: |
+          cd dist
+          tar -cvf impfboosterbot_macOS_x86_64.tar impfboosterbot_macOS_x86_64
+      - uses: actions/upload-artifact@v2
+        with:
+          name: impfboosterbot_macOS_x86_64
+          path: dist/impfboosterbot_macOS_x86_64.tar
+
+  buildwindows:
+    name: Build for win64
+    runs-on: windows-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+      - name: install dependencies
+        run: |
+          python -m venv impfenv
+          impfenv/Scripts/Activate.ps1
+          python -m pip install -r requirements.txt
+      - name: Run the unittests
+        run: |
+          impfenv/Scripts/Activate.ps1
+          python -m unittest discover tests
+      - name: Build executable
+        run: |
+          . impfenv/Scripts/activate
+          ./generate_binaries_windows.sh
+        shell: bash
+      - uses: actions/upload-artifact@v2
+        with:
+          name: impfboosterbot_win64
+          path: dist/impfboosterbot_win64.exe

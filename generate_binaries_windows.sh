@@ -1,0 +1,1 @@
+pyinstaller launcher.py --add-binary ./include/win64/geckodriver.exe:. --noconfirm --onefile --name impfboosterbot_win64

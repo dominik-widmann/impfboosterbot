@@ -14,8 +14,8 @@ Please use this bot responsibly and at your own risk.
 * **Person registrated:** In your account, you need to click `+ Person hinzufügen` to register a person. Later, you will need to supply the bot with a number to reference which person you want to book the appointment for. Numbers start from 1 and increase by 1 from left to right as the persons are shown in your account.
 * **Impfzentrum selected:** For this person, you need to have the vaccination site (Impfzentrum) selected at which you want to book an appointment (`Person auswählen > Impfzentrum auswählen`).
 * **Firefox:** Get it [here](https://www.mozilla.org/en-US/firefox/new/).
-* **Python:** Get it [here](https://www.python.org/downloads/).
-* **Geckodriver:** Install the firefox selenium driver following these [instructions](https://github.com/mozilla/geckodriver/releases) and make sure it is on your path (e.g. by installing it to `/usr/local/bin/`).
+* **Python:** Get it [here](https://www.python.org/downloads/). If prompted, also install pip.
+* **Geckodriver:** Install the firefox selenium driver following these [instructions](https://github.com/mozilla/geckodriver/releases). The binaries for your platform can be found in the "Assets" section of the latest release. Make sure geckodriver is on your path (e.g. on linux/macOS by installing it to `/usr/local/bin/`).
 
 ## Installation
 Open your favorite command line tool and run the following commands to download the impfboosterbot and install all packages from `requirements.txt`:

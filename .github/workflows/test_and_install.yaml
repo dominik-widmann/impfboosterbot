@@ -29,10 +29,14 @@ jobs:
           source impfenv/bin/activate
           ./generate_binaries_ubuntu.sh
         shell: bash
+      - name: Tar executable
+        run: |
+          cd dist
+          tar -cvf impfboosterbot_linux64.tar impfboosterbot_linux64
       - uses: actions/upload-artifact@v2
         with:
           name: impfboosterbot_linux64
-          path: dist/impfboosterbot_linux64
+          path: dist/impfboosterbot_linux64.tar
 
   buildmac:
     name: Build for macOS

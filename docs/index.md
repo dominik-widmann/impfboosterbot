@@ -17,10 +17,12 @@ Please use this bot responsibly and at your own risk.
 * **Github account:** Create it [here](https://github.com) to be able to download the bot executable.
 
 ## Installation
-Download the executable for your platform. You need to create a user account at https://github.com
-* Windows 11: TODO
-* MacOS Big Sur (or higher): TODO
-* Linux: TODO
+Download the latest executable for your platform [here](https://github.com/dominik-widmann/impfboosterbot/releases/tag/v1.0). You need to have a user account at https://github.com
+
+Supported platforms are
+* Windows 11
+* MacOS Big Sur (or higher)
+* Linux
 
 ## Usage
 ### MacOS

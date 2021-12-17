@@ -23,11 +23,18 @@ Download the executable for your platform. You need to create a user account at 
 * Linux: TODO
 
 ## Usage
-Double-click the downloaded executable. After a few seconds, a terminal will show up. 
-MacOS and Windows will probably refuse launching the program at the first attempt since they are not able to verify the 
-app. This can be solved as follows:  
-* On MacOS, go to "system preferences" -> "Security & Privacy" -> "General" and click on "Open Anyway"
-* On Windows, after double-clicking the exe, a dialog opens. Go to "more info" -> "Run anyway"
+### MacOS
+* Double-click the downloaded executable
+* MacOS will probably refuse to launch the app at the first attempt since it are not able to verify it
+* This can be solved as follows: go to "system preferences" -> "Security & Privacy" -> "General" and click on "Open Anyway"
+
+### Linux
+* Just run the downloaded executable. Since you are using linux, you might also be interested in having a look at the [code](https://github.com/dominik-widmann/impfboosterbot). ;)
+
+### Windows 11
+* Extract the downloaded folder
+* Double-click impfboosterbot_win64.exe (In the extracted folder)  
+* After double-clicking the exe, a dialog opens. Go to "more info" -> "Run anyway"
 
 One the bot is started, it will say hi to you in the terminal and start prompting you for the required inputs to book a 
 vaccination appointment. Type them correctly and submit them by pressing ENTER.

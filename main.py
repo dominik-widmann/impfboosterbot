@@ -60,7 +60,7 @@ def run_bot(username, password, person_number, earliest_date, latest_date, iscom
         "'latest_date' must be equal to or after 'earliest_date'"
 
     # Start browser
-    firefox_service = Service(get_gecko_driver_for_OS(iscompiled), log_file=os.path.devnull)
+    firefox_service = Service(get_gecko_driver_for_OS(iscompiled))
     browser = webdriver.Firefox(service=firefox_service)
     url = 'https://ciam.impfzentren.bayern/auth/realms/C19V-Citizen/protocol/openid-connect/auth?client_id=c19v-frontend&redirect_uri=https%3A%2F%2Fimpfzentren.bayern%2Fcitizen%2F&state=c5c6e344-a034-4bfc-8a16-82d223932875&response_mode=fragment&response_type=code&scope=openid&nonce=15b8b742-4fd4-487b-a5de-759ffdb44008&ui_locales=de'
 
